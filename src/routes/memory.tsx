@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Pencil, Trash2, Plus, ShieldCheck } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Guard, Card, PageHeader, Pill, SourceChips } from "@/components/relay/kit";

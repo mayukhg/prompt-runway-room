@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Lock, ArrowDown, ArrowUp, Clock } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Guard, Card, PageHeader, Pill, Empty, Why, statusTone } from "@/components/relay/kit";

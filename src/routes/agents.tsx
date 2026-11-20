@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Power } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
@@ -21,12 +21,13 @@ function Agents() {
   const agent = agents.find((a) => a.id === target);
   return (
     <>
-      <PageHeader title="Agent inventory" sub="One agent per pilot employee. Metadata only; never content."
+      <PageHeader title="Agent inventory" sub={`${agents.length} agents · one per pilot employee · metadata only; never content.`}
         actions={<Button variant={tenantKilled ? "outline" : "destructive"} onClick={() => tenantKilled ? (set({ tenantKilled: false }), toast.success("All agents resumed")) : setTarget("tenant")}><Power className="mr-2 h-4 w-4" />{tenantKilled ? "Resume all agents" : "Tenant kill switch"}</Button>} />
       {tenantKilled && <div className="mb-4 rounded-lg border border-danger/40 bg-danger/10 px-4 py-2 text-sm text-danger">All agents are paused tenant-wide. Users see "Relay is paused by your security team".</div>}
       <Card className="p-0">
+        <div className="max-h-[65vh] overflow-auto" aria-label="Scrollable list of all 42 pilot agents">
         <Table>
-          <TableHeader><TableRow><TableHead>Agent</TableHead><TableHead>Owner</TableHead><TableHead>Team</TableHead><TableHead>Status</TableHead><TableHead>Apps</TableHead><TableHead>Autonomy</TableHead><TableHead>Last activity</TableHead><TableHead className="sr-only">Kill switch</TableHead></TableRow></TableHeader>
+          <TableHeader className="sticky top-0 z-10 [&_th]:bg-card"><TableRow><TableHead>Agent</TableHead><TableHead>Owner</TableHead><TableHead>Team</TableHead><TableHead>Status</TableHead><TableHead>Apps</TableHead><TableHead>Autonomy</TableHead><TableHead>Last activity</TableHead><TableHead className="sr-only">Kill switch</TableHead></TableRow></TableHeader>
           <TableBody>
             {agents.map((a) => {
               const st = tenantKilled ? "Paused" : a.status;
@@ -43,6 +44,7 @@ function Agents() {
             })}
           </TableBody>
         </Table>
+        </div>
       </Card>
       <AlertDialog open={!!target} onOpenChange={(o) => !o && setTarget(null)}>
         <AlertDialogContent>

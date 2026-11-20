@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Check } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Guard, Card, ConnectorBadge, PageHeader } from "@/components/relay/kit";

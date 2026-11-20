@@ -149,7 +149,7 @@ function NotAvailable({ persona, path }: { persona: Persona; path: string }) {
 }
 
 export const chartTheme = {
-  grid: "var(--border)",
+  grid: "var(--chart-grid)",
   axis: "var(--muted-foreground)",
   tooltip: { background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 8, color: "var(--popover-foreground)", fontSize: 12 },
 };

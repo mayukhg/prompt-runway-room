@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle2, AlertCircle, XCircle } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Button } from "@/components/ui/button";
 import { Guard, Card, PageHeader, Pill } from "@/components/relay/kit";
 import { useRelay } from "@/lib/relay/store";

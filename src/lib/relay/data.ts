@@ -284,13 +284,34 @@ export const SEC_EVENTS: SecEvent[] = [
 ];
 
 const teams = ["Product", "Sales", "Engineering", "Finance", "Marketing", "People"];
-const owners = ["Priya Raman", "Alex Chen", "Jordan Taylor", "Morgan Kelly", "Sam Vega", "Riley Moore", "Casey Park", "Drew Ellis", "Jamie Fox", "Taylor Reid", "Avery Lund", "Quinn Ortiz"];
+const agentPeople: [id: string, owner: string][] = [
+  ["relay-pr-018", "Priya Raman"], ["relay-ac-004", "Alex Chen"],
+  ["relay-jt-011", "Jordan Taylor"], ["relay-mk-027", "Morgan Kelly"],
+  ["relay-sv-033", "Sam Vega"], ["relay-rm-036", "Riley Moore"],
+  ["relay-cp-039", "Casey Park"], ["relay-de-042", "Drew Ellis"],
+  ["relay-jf-045", "Jamie Fox"], ["relay-tw-040", "Taylor Wells"],
+  ["relay-al-051", "Avery Lund"], ["relay-qo-054", "Quinn Ortiz"],
+  ["relay-am-057", "Arjun Mehta"], ["relay-sm-060", "Sofia Marin"],
+  ["relay-mh-063", "Max Hoffmann"], ["relay-ho-066", "Hannah Okoye"],
+  ["relay-ks-069", "Kenji Sato"], ["relay-lh-072", "Leila Haddad"],
+  ["relay-tb-075", "Tom Becker"], ["relay-np-078", "Nadia Petrova"],
+  ["relay-rg-081", "Rachel Gomez"], ["relay-or-084", "Omar Reyes"],
+  ["relay-lk-087", "Laura Kim"], ["relay-cv-090", "Chris Vance"],
+  ["relay-na-093", "Nora Andrews"], ["relay-ib-096", "Isaac Brown"],
+  ["relay-jc-099", "Julia Carter"], ["relay-ld-102", "Liam Davis"],
+  ["relay-ee-105", "Emma Evans"], ["relay-mf-108", "Mason Foster"],
+  ["relay-og-111", "Olivia Grant"], ["relay-wh-114", "William Hughes"],
+  ["relay-ai-117", "Ava Irving"], ["relay-nj-120", "Noah Jenkins"],
+  ["relay-sk-123", "Sophia King"], ["relay-el-126", "Ethan Lopez"],
+  ["relay-mm-129", "Mia Morgan"], ["relay-jn-132", "James Nolan"],
+  ["relay-zp-135", "Zoe Price"], ["relay-br-138", "Benjamin Ross"],
+  ["relay-cs-141", "Chloe Scott"], ["relay-ht-144", "Henry Turner"],
+];
 export interface Agent { id: string; owner: string; team: string; status: "Active" | "Paused"; apps: string[]; level: number; last: string }
-export const AGENTS: Agent[] = owners.map((o, i) => ({
-  id: `relay-${o.split(" ").map((p) => p.charAt(0).toLowerCase()).join("")}-${String(18 + i * 3).padStart(3, "0")}`,
-  owner: o, team: teams[i % teams.length]!, status: i === 10 ? "Paused" : "Active",
+export const AGENTS: Agent[] = agentPeople.map(([id, owner], i) => ({
+  id, owner, team: teams[i % teams.length]!, status: i === 10 ? "Paused" : "Active",
   apps: i % 3 === 0 ? ["M365", "Slack", "Salesforce"] : i % 3 === 1 ? ["Google", "Slack"] : ["M365", "Slack"],
-  level: [3, 2, 2, 3, 1, 2, 3, 2, 2, 1, 2, 3][i] ?? 2, last: `${(i * 4) % 50 + 1} min ago`,
+  level: [3, 2, 2, 3, 1, 2][i % 6] ?? 2, last: `${(i * 4) % 50 + 1} min ago`,
 }));
 
 export const CONNECTORS = [

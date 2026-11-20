@@ -39,7 +39,7 @@ function SideNav({ collapsed, onNavigate }: { collapsed: boolean; onNavigate?: (
       {NAV[persona].map((n) => {
         const active = n.to === "/" ? pathname === "/" : pathname.startsWith(n.to);
         return (
-          <Link key={n.to} to={n.to} onClick={onNavigate} title={collapsed ? n.label : undefined}
+          <Link key={n.to} to={n.to} onClick={() => { document.body.style.removeProperty("pointer-events"); onNavigate?.(); }} title={collapsed ? n.label : undefined}
             className={cn("flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-foreground", active && "bg-sidebar-accent font-medium text-sidebar-foreground")}>
             <n.icon className={cn("h-4 w-4 shrink-0", active && "text-primary")} aria-hidden />
             {!collapsed && <span className="flex-1 truncate">{n.label}</span>}
@@ -131,9 +131,14 @@ function Palette() {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { persona, bannerOpen, theme, set } = useRelay();
+  const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   useEffect(() => { document.documentElement.classList.toggle("dark", theme === "dark"); }, [theme]);
+  useEffect(() => {
+    setMobileOpen(false);
+    document.body.style.removeProperty("pointer-events");
+  }, [pathname]);
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
@@ -173,7 +178,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         )}
         <main key={persona} className="relay-fade mx-auto w-full max-w-6xl flex-1 px-4 py-6 pb-28 md:px-8">{children}</main>
       </div>
-      <Toaster theme={theme} position="bottom-left" duration={3500} />
+      <Toaster theme={theme} position="bottom-left" duration={3500} visibleToasts={1} />
       <Palette />
       <DemoPanel />
       <TourCard />

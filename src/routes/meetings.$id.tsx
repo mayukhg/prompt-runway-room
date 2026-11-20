@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, FileText, CheckCircle2, XCircle } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Button } from "@/components/ui/button";
 import { Guard, Card, PageHeader, Pill, SourceChips, chartTheme } from "@/components/relay/kit";
@@ -59,7 +59,7 @@ function Prep() {
         </div>
         <div className="space-y-6">
           {m.questions.length > 0 && <Card title="Suggested questions"><ul className="list-disc space-y-1.5 pl-4 text-sm">{m.questions.map((q) => <li key={q}>{q}</li>)}</ul></Card>}
-          {m.grade && (
+          {m.past && m.grade && (
             <Card title="How well did this brief predict the meeting?">
               <p className="tnum text-2xl font-semibold">{m.grade.hit} of {m.grade.total} <span className="text-sm font-normal text-muted-foreground">key points discussed</span></p>
               <p className="mt-1 text-xs text-muted-foreground">Compared with the action-items email, meeting notes and follow-up Slack.</p>
@@ -67,7 +67,7 @@ function Prep() {
               <p className="mt-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">What I'll do differently next time</p>
               <ul className="mt-1 space-y-1 text-sm">{m.grade.nextTime.map((n) => <li key={n} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" />{n}</li>)}</ul>
               <p className="mt-4 text-xs text-muted-foreground">Brief accuracy, last 6 weeks</p>
-              <div className="h-28"><ResponsiveContainer><LineChart data={accuracy}><CartesianGrid stroke={chartTheme.grid} vertical={false} /><XAxis dataKey="w" stroke={chartTheme.axis} fontSize={11} /><YAxis domain={[0, 100]} stroke={chartTheme.axis} fontSize={11} width={28} /><Tooltip contentStyle={chartTheme.tooltip} formatter={(v) => `${v}%`} /><Line dataKey="v" stroke="var(--chart-1)" strokeWidth={2} dot={false} /></LineChart></ResponsiveContainer></div>
+              <div className="h-28"><ResponsiveContainer><LineChart data={accuracy}><CartesianGrid stroke={chartTheme.grid} vertical={false} /><XAxis dataKey="w" stroke={chartTheme.axis} fontSize={11} /><YAxis domain={[0, 100]} stroke={chartTheme.axis} fontSize={11} width={28} /><Tooltip contentStyle={chartTheme.tooltip} formatter={(v) => `${v}%`} /><Line dataKey="v" stroke="var(--chart-1)" strokeWidth={2} dot={false} isAnimationActive={false} /></LineChart></ResponsiveContainer></div>
             </Card>
           )}
         </div>

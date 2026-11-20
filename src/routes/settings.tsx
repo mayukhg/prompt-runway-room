@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";

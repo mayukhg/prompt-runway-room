@@ -11,7 +11,7 @@ export const Route = createFileRoute("/security")({
 
 function Overview() {
   const { agents, threatsBlocked, secEvents, tenantKilled, trust } = useRelay();
-  const active = tenantKilled ? 0 : agents.filter((a) => a.status === "Active").length + 30;
+  const active = tenantKilled ? 0 : agents.filter((a) => a.status === "Active").length;
   const reviews = trust.filter((t) => t.pending).length + 1;
   return (
     <>

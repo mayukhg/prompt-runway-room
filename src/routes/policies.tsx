@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Guard, Card, PageHeader, Pill } from "@/components/relay/kit";
 import { LEVELS, POLICY_PACKS, TRUST } from "@/lib/relay/data";

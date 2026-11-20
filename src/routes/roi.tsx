@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { toast } from "sonner";
+import { toast } from "@/lib/relay/toast";
 import { Bar, BarChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,7 +30,7 @@ function Roi() {
       </div>
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         <Card title="Usage-credit burn (long-running tasks)" className="lg:col-span-2">
-          <div className="h-56"><ResponsiveContainer><BarChart data={burn}><CartesianGrid stroke={chartTheme.grid} vertical={false} /><XAxis dataKey="w" stroke={chartTheme.axis} fontSize={11} /><YAxis stroke={chartTheme.axis} fontSize={11} width={40} /><Tooltip contentStyle={chartTheme.tooltip} /><ReferenceLine y={budgetAlert} stroke="var(--chart-5)" strokeDasharray="4 4" label={{ value: "Alert", fill: "var(--muted-foreground)", fontSize: 11 }} /><Bar dataKey="v" fill="var(--chart-1)" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></div>
+          <div className="h-56"><ResponsiveContainer><BarChart data={burn}><CartesianGrid stroke={chartTheme.grid} vertical={false} /><XAxis dataKey="w" stroke={chartTheme.axis} fontSize={11} /><YAxis stroke={chartTheme.axis} fontSize={11} width={40} /><Tooltip contentStyle={chartTheme.tooltip} /><ReferenceLine y={budgetAlert} stroke="var(--chart-2)" strokeDasharray="6 4" label={{ value: "Alert", fill: "var(--muted-foreground)", fontSize: 11 }} /><Bar dataKey="v" fill="var(--chart-1)" radius={[4, 4, 0, 0]} isAnimationActive={false} /></BarChart></ResponsiveContainer></div>
         </Card>
         <Card title="Budget alert">
           <form onSubmit={(e) => { e.preventDefault(); const n = Number(val); if (!n || n < 0) { toast.error("Enter a positive number of credits"); return; } set({ budgetAlert: n }); toast.success(`Alert set at ${n.toLocaleString("en-US")} credits/week`); }}>

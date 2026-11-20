@@ -25,7 +25,7 @@ function Adoption() {
           </ul>
         </Card>
         <Card title="Shadow-AI displacement: unapproved AI tool sessions per 100 users" className="lg:col-span-2">
-          <div className="h-52"><ResponsiveContainer><LineChart data={shadow}><CartesianGrid stroke={chartTheme.grid} vertical={false} /><XAxis dataKey="w" stroke={chartTheme.axis} fontSize={11} /><YAxis stroke={chartTheme.axis} fontSize={11} width={28} /><Tooltip contentStyle={chartTheme.tooltip} /><Line dataKey="v" stroke="var(--chart-3)" strokeWidth={2} /></LineChart></ResponsiveContainer></div>
+          <div className="h-52"><ResponsiveContainer><LineChart data={shadow}><CartesianGrid stroke={chartTheme.grid} vertical={false} /><XAxis dataKey="w" stroke={chartTheme.axis} fontSize={11} /><YAxis stroke={chartTheme.axis} fontSize={11} width={28} /><Tooltip contentStyle={chartTheme.tooltip} /><Line dataKey="v" stroke="var(--chart-2)" strokeWidth={2} dot={false} isAnimationActive={false} /></LineChart></ResponsiveContainer></div>
         </Card>
       </div>
     </>

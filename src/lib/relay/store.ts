@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { toast } from "sonner";
+import { toast } from "./toast";
 import * as D from "./data";
 import { approveUpgrade, stepDown } from "./rules";
 
@@ -105,12 +105,24 @@ export const useRelay = create<State & Actions>((set, get) => ({
   stepDownClass: (id) => set((s) => ({ trust: s.trust.map((t) => (t.id === id ? stepDown(t) : t)) })),
   requestUpgrade: (id) => set((s) => ({ trust: s.trust.map((t) => (t.id === id ? { ...t, pending: true } : t)) })),
   decideUpgrade: (id, ok) =>
-    set((s) => ({
-      trust: s.trust.map((t) => (t.id === id ? (ok ? approveUpgrade(t) : { ...t, pending: false }) : t)),
-      upgradeDecisions: { ...s.upgradeDecisions, [id]: ok ? "approved" : "deferred" },
-      autonomyMix: ok ? { ...s.autonomyMix, L2: s.autonomyMix.L2 - 6, L3: s.autonomyMix.L3 + 6 } : s.autonomyMix,
-      audit: [auditEv(PRIYA_AGENT, ok ? "Autonomy raised by CISO" : "Autonomy request deferred", "Policy", "Allowed", "Mei Lin"), ...s.audit],
-    })),
+    set((s) => {
+      const current = s.trust.find((t) => t.id === id);
+      const upgraded = current && ok ? approveUpgrade(current) : current;
+      const autonomyMix = { ...s.autonomyMix };
+      if (current && upgraded && upgraded.level > current.level) {
+        const from = `L${current.level}` as keyof typeof autonomyMix;
+        const to = `L${upgraded.level}` as keyof typeof autonomyMix;
+        const amount = Math.min(6, autonomyMix[from]);
+        autonomyMix[from] -= amount;
+        autonomyMix[to] += amount;
+      }
+      return {
+        trust: s.trust.map((t) => (t.id === id ? (ok ? approveUpgrade(t) : { ...t, pending: false }) : t)),
+        upgradeDecisions: { ...s.upgradeDecisions, [id]: ok ? "approved" : "deferred" },
+        autonomyMix,
+        audit: [auditEv(PRIYA_AGENT, ok ? "Autonomy raised by CISO" : "Autonomy request deferred", "Policy", "Allowed", "Mei Lin"), ...s.audit],
+      };
+    }),
   upsertFact: (f) => set((s) => ({ memory: s.memory.some((m) => m.id === f.id) ? s.memory.map((m) => (m.id === f.id ? f : m)) : [...s.memory, f] })),
   deleteFact: (id) => set((s) => ({ memory: s.memory.filter((m) => m.id !== id) })),
   undoActivity: (id) => set((s) => ({ activity: s.activity.map((a) => (a.id === id ? { ...a, undone: true } : a)) })),

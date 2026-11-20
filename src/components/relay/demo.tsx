@@ -1,3 +1,4 @@
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { Play, RotateCcw, X, Check, Compass, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -70,14 +71,59 @@ export function DemoPanel() {
 export function TourCard() {
   const step = useRelay((s) => s.tourStep);
   const go = useGoTour();
+  const [position, setPosition] = useState<{ left: number; top: number; width: number; visible: boolean } | null>(null);
+
+  useEffect(() => {
+    if (step === null) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { event.preventDefault(); go(null); }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [step]);
+
+  useLayoutEffect(() => {
+    if (step === null) { setPosition(null); return; }
+    setPosition(null);
+    const place = () => {
+      const target = document.querySelector<HTMLElement>("main h1") ?? document.querySelector<HTMLElement>("main section");
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      const card = document.getElementById("relay-tour-card");
+      const width = Math.min(360, window.innerWidth - 32);
+      const height = card?.offsetHeight ?? 160;
+      const margin = 16;
+      const fitsRight = rect.right + margin + width <= window.innerWidth - margin;
+      let left = fitsRight ? rect.right + margin : Math.min(Math.max(margin, rect.left), window.innerWidth - width - margin);
+      let top = fitsRight ? rect.top : rect.bottom + margin;
+      if (top + height > window.innerHeight - margin) top = fitsRight ? window.innerHeight - height - margin : rect.top - height - margin;
+      left = Math.max(margin, left);
+      top = Math.max(margin, top);
+      const overlaps = left < rect.right && left + width > rect.left && top < rect.bottom && top + height > rect.top;
+      setPosition({ left, top, width, visible: !overlaps });
+    };
+    let frame = 0;
+    let frameCount = 0;
+    const track = () => {
+      frameCount += 1;
+      if (frameCount > 2) place();
+      frame = requestAnimationFrame(track);
+    };
+    frame = requestAnimationFrame(track);
+    window.addEventListener("resize", place);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("resize", place); };
+  }, [step]);
+
   if (step === null) return null;
   const t = TOUR[step];
   if (!t) return null;
   return (
-    <div role="dialog" aria-label="Guided tour" className="relay-fade fixed bottom-20 left-1/2 z-50 w-[min(92vw,560px)] -translate-x-1/2 rounded-xl border border-primary/50 bg-popover p-4 shadow-2xl">
+    <div id="relay-tour-card" role="dialog" aria-modal="false" aria-label="Guided tour" data-tour-step={step + 1}
+      className="relay-fade fixed z-50 rounded-xl border border-primary/50 bg-popover p-4 shadow-2xl"
+      style={{ left: position?.left ?? 16, top: position?.top ?? 16, width: position?.width ?? 360, visibility: position?.visible ? "visible" : "hidden" }}>
       <div className="mb-1 flex items-center justify-between text-xs text-muted-foreground">
         <span>Step {step + 1} of {TOUR.length} · As {PERSONAS[t.persona].name}</span>
-        <button onClick={() => go(null)} aria-label="End tour"><X className="h-4 w-4" /></button>
+        <button onClick={() => go(null)} aria-label="End tour" className="rounded p-1 hover:bg-accent"><X className="h-4 w-4" /></button>
       </div>
       <p className="text-sm">{t.caption}</p>
       <div className="mt-3 flex justify-end gap-2">
