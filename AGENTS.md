@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Relay is a front-end-only demo: all data lives in `src/lib/relay/data.ts` and live state in the Zustand store `src/lib/relay/store.ts`; nothing calls a backend, so the demo stays deterministic and resettable.
+- Role access is defined once in `src/lib/relay/rules.ts` (ACCESS map) and enforced by `<Guard>` on every page, so persona separation can't drift between nav, palette and routes.
+- Simulator events mutate shared store slices (activity, audit, secEvents, counters) so each persona's view of the same event stays consistent.

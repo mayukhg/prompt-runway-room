@@ -10,33 +10,345 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityRouteImport } from './routes/activity'
+import { Route as AdoptionRouteImport } from './routes/adoption'
+import { Route as AdoptionSummaryRouteImport } from './routes/adoption-summary'
+import { Route as AgentsRouteImport } from './routes/agents'
+import { Route as ApprovalsRouteImport } from './routes/approvals'
+import { Route as AuditRouteImport } from './routes/audit'
+import { Route as BriefRouteImport } from './routes/brief'
+import { Route as CommitmentsRouteImport } from './routes/commitments'
+import { Route as ConnectorsRouteImport } from './routes/connectors'
+import { Route as EvalsRouteImport } from './routes/evals'
+import { Route as InboxRouteImport } from './routes/inbox'
+import { Route as MeetingsRouteImport } from './routes/meetings'
+import { Route as MemoryRouteImport } from './routes/memory'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as PilotRouteImport } from './routes/pilot'
+import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as ResidencyRouteImport } from './routes/residency'
+import { Route as RoiRouteImport } from './routes/roi'
+import { Route as SecurityRouteImport } from './routes/security'
+import { Route as SecuritySummaryRouteImport } from './routes/security-summary'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ValueRouteImport } from './routes/value'
+import { Route as MeetingsIndexRouteImport } from './routes/meetings.index'
+import { Route as MeetingsIdRouteImport } from './routes/meetings.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivityRoute = ActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdoptionRoute = AdoptionRouteImport.update({
+  id: '/adoption',
+  path: '/adoption',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdoptionSummaryRoute = AdoptionSummaryRouteImport.update({
+  id: '/adoption-summary',
+  path: '/adoption-summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApprovalsRoute = ApprovalsRouteImport.update({
+  id: '/approvals',
+  path: '/approvals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BriefRoute = BriefRouteImport.update({
+  id: '/brief',
+  path: '/brief',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommitmentsRoute = CommitmentsRouteImport.update({
+  id: '/commitments',
+  path: '/commitments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectorsRoute = ConnectorsRouteImport.update({
+  id: '/connectors',
+  path: '/connectors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvalsRoute = EvalsRouteImport.update({
+  id: '/evals',
+  path: '/evals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InboxRoute = InboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingsRoute = MeetingsRouteImport.update({
+  id: '/meetings',
+  path: '/meetings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemoryRoute = MemoryRouteImport.update({
+  id: '/memory',
+  path: '/memory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PilotRoute = PilotRouteImport.update({
+  id: '/pilot',
+  path: '/pilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRoute = PoliciesRouteImport.update({
+  id: '/policies',
+  path: '/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResidencyRoute = ResidencyRouteImport.update({
+  id: '/residency',
+  path: '/residency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoiRoute = RoiRouteImport.update({
+  id: '/roi',
+  path: '/roi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecuritySummaryRoute = SecuritySummaryRouteImport.update({
+  id: '/security-summary',
+  path: '/security-summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ValueRoute = ValueRouteImport.update({
+  id: '/value',
+  path: '/value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingsIndexRoute = MeetingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MeetingsRoute,
+} as any)
+const MeetingsIdRoute = MeetingsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => MeetingsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/adoption': typeof AdoptionRoute
+  '/adoption-summary': typeof AdoptionSummaryRoute
+  '/agents': typeof AgentsRoute
+  '/approvals': typeof ApprovalsRoute
+  '/audit': typeof AuditRoute
+  '/brief': typeof BriefRoute
+  '/commitments': typeof CommitmentsRoute
+  '/connectors': typeof ConnectorsRoute
+  '/evals': typeof EvalsRoute
+  '/inbox': typeof InboxRoute
+  '/meetings': typeof MeetingsRouteWithChildren
+  '/memory': typeof MemoryRoute
+  '/onboarding': typeof OnboardingRoute
+  '/pilot': typeof PilotRoute
+  '/policies': typeof PoliciesRoute
+  '/residency': typeof ResidencyRoute
+  '/roi': typeof RoiRoute
+  '/security': typeof SecurityRoute
+  '/security-summary': typeof SecuritySummaryRoute
+  '/settings': typeof SettingsRoute
+  '/value': typeof ValueRoute
+  '/meetings/$id': typeof MeetingsIdRoute
+  '/meetings/': typeof MeetingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/adoption': typeof AdoptionRoute
+  '/adoption-summary': typeof AdoptionSummaryRoute
+  '/agents': typeof AgentsRoute
+  '/approvals': typeof ApprovalsRoute
+  '/audit': typeof AuditRoute
+  '/brief': typeof BriefRoute
+  '/commitments': typeof CommitmentsRoute
+  '/connectors': typeof ConnectorsRoute
+  '/evals': typeof EvalsRoute
+  '/inbox': typeof InboxRoute
+  '/memory': typeof MemoryRoute
+  '/onboarding': typeof OnboardingRoute
+  '/pilot': typeof PilotRoute
+  '/policies': typeof PoliciesRoute
+  '/residency': typeof ResidencyRoute
+  '/roi': typeof RoiRoute
+  '/security': typeof SecurityRoute
+  '/security-summary': typeof SecuritySummaryRoute
+  '/settings': typeof SettingsRoute
+  '/value': typeof ValueRoute
+  '/meetings/$id': typeof MeetingsIdRoute
+  '/meetings': typeof MeetingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/adoption': typeof AdoptionRoute
+  '/adoption-summary': typeof AdoptionSummaryRoute
+  '/agents': typeof AgentsRoute
+  '/approvals': typeof ApprovalsRoute
+  '/audit': typeof AuditRoute
+  '/brief': typeof BriefRoute
+  '/commitments': typeof CommitmentsRoute
+  '/connectors': typeof ConnectorsRoute
+  '/evals': typeof EvalsRoute
+  '/inbox': typeof InboxRoute
+  '/meetings': typeof MeetingsRouteWithChildren
+  '/memory': typeof MemoryRoute
+  '/onboarding': typeof OnboardingRoute
+  '/pilot': typeof PilotRoute
+  '/policies': typeof PoliciesRoute
+  '/residency': typeof ResidencyRoute
+  '/roi': typeof RoiRoute
+  '/security': typeof SecurityRoute
+  '/security-summary': typeof SecuritySummaryRoute
+  '/settings': typeof SettingsRoute
+  '/value': typeof ValueRoute
+  '/meetings/$id': typeof MeetingsIdRoute
+  '/meetings/': typeof MeetingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/activity'
+    | '/adoption'
+    | '/adoption-summary'
+    | '/agents'
+    | '/approvals'
+    | '/audit'
+    | '/brief'
+    | '/commitments'
+    | '/connectors'
+    | '/evals'
+    | '/inbox'
+    | '/meetings'
+    | '/memory'
+    | '/onboarding'
+    | '/pilot'
+    | '/policies'
+    | '/residency'
+    | '/roi'
+    | '/security'
+    | '/security-summary'
+    | '/settings'
+    | '/value'
+    | '/meetings/$id'
+    | '/meetings/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/activity'
+    | '/adoption'
+    | '/adoption-summary'
+    | '/agents'
+    | '/approvals'
+    | '/audit'
+    | '/brief'
+    | '/commitments'
+    | '/connectors'
+    | '/evals'
+    | '/inbox'
+    | '/memory'
+    | '/onboarding'
+    | '/pilot'
+    | '/policies'
+    | '/residency'
+    | '/roi'
+    | '/security'
+    | '/security-summary'
+    | '/settings'
+    | '/value'
+    | '/meetings/$id'
+    | '/meetings'
+  id:
+    | '__root__'
+    | '/'
+    | '/activity'
+    | '/adoption'
+    | '/adoption-summary'
+    | '/agents'
+    | '/approvals'
+    | '/audit'
+    | '/brief'
+    | '/commitments'
+    | '/connectors'
+    | '/evals'
+    | '/inbox'
+    | '/meetings'
+    | '/memory'
+    | '/onboarding'
+    | '/pilot'
+    | '/policies'
+    | '/residency'
+    | '/roi'
+    | '/security'
+    | '/security-summary'
+    | '/settings'
+    | '/value'
+    | '/meetings/$id'
+    | '/meetings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityRoute: typeof ActivityRoute
+  AdoptionRoute: typeof AdoptionRoute
+  AdoptionSummaryRoute: typeof AdoptionSummaryRoute
+  AgentsRoute: typeof AgentsRoute
+  ApprovalsRoute: typeof ApprovalsRoute
+  AuditRoute: typeof AuditRoute
+  BriefRoute: typeof BriefRoute
+  CommitmentsRoute: typeof CommitmentsRoute
+  ConnectorsRoute: typeof ConnectorsRoute
+  EvalsRoute: typeof EvalsRoute
+  InboxRoute: typeof InboxRoute
+  MeetingsRoute: typeof MeetingsRouteWithChildren
+  MemoryRoute: typeof MemoryRoute
+  OnboardingRoute: typeof OnboardingRoute
+  PilotRoute: typeof PilotRoute
+  PoliciesRoute: typeof PoliciesRoute
+  ResidencyRoute: typeof ResidencyRoute
+  RoiRoute: typeof RoiRoute
+  SecurityRoute: typeof SecurityRoute
+  SecuritySummaryRoute: typeof SecuritySummaryRoute
+  SettingsRoute: typeof SettingsRoute
+  ValueRoute: typeof ValueRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +360,215 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activity': {
+      id: '/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adoption': {
+      id: '/adoption'
+      path: '/adoption'
+      fullPath: '/adoption'
+      preLoaderRoute: typeof AdoptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adoption-summary': {
+      id: '/adoption-summary'
+      path: '/adoption-summary'
+      fullPath: '/adoption-summary'
+      preLoaderRoute: typeof AdoptionSummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/approvals': {
+      id: '/approvals'
+      path: '/approvals'
+      fullPath: '/approvals'
+      preLoaderRoute: typeof ApprovalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brief': {
+      id: '/brief'
+      path: '/brief'
+      fullPath: '/brief'
+      preLoaderRoute: typeof BriefRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/commitments': {
+      id: '/commitments'
+      path: '/commitments'
+      fullPath: '/commitments'
+      preLoaderRoute: typeof CommitmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connectors': {
+      id: '/connectors'
+      path: '/connectors'
+      fullPath: '/connectors'
+      preLoaderRoute: typeof ConnectorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evals': {
+      id: '/evals'
+      path: '/evals'
+      fullPath: '/evals'
+      preLoaderRoute: typeof EvalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inbox': {
+      id: '/inbox'
+      path: '/inbox'
+      fullPath: '/inbox'
+      preLoaderRoute: typeof InboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meetings': {
+      id: '/meetings'
+      path: '/meetings'
+      fullPath: '/meetings'
+      preLoaderRoute: typeof MeetingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/memory': {
+      id: '/memory'
+      path: '/memory'
+      fullPath: '/memory'
+      preLoaderRoute: typeof MemoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pilot': {
+      id: '/pilot'
+      path: '/pilot'
+      fullPath: '/pilot'
+      preLoaderRoute: typeof PilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies': {
+      id: '/policies'
+      path: '/policies'
+      fullPath: '/policies'
+      preLoaderRoute: typeof PoliciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/residency': {
+      id: '/residency'
+      path: '/residency'
+      fullPath: '/residency'
+      preLoaderRoute: typeof ResidencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roi': {
+      id: '/roi'
+      path: '/roi'
+      fullPath: '/roi'
+      preLoaderRoute: typeof RoiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security-summary': {
+      id: '/security-summary'
+      path: '/security-summary'
+      fullPath: '/security-summary'
+      preLoaderRoute: typeof SecuritySummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/value': {
+      id: '/value'
+      path: '/value'
+      fullPath: '/value'
+      preLoaderRoute: typeof ValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meetings/': {
+      id: '/meetings/'
+      path: '/'
+      fullPath: '/meetings/'
+      preLoaderRoute: typeof MeetingsIndexRouteImport
+      parentRoute: typeof MeetingsRoute
+    }
+    '/meetings/$id': {
+      id: '/meetings/$id'
+      path: '/$id'
+      fullPath: '/meetings/$id'
+      preLoaderRoute: typeof MeetingsIdRouteImport
+      parentRoute: typeof MeetingsRoute
+    }
   }
 }
 
+interface MeetingsRouteChildren {
+  MeetingsIdRoute: typeof MeetingsIdRoute
+  MeetingsIndexRoute: typeof MeetingsIndexRoute
+}
+
+const MeetingsRouteChildren: MeetingsRouteChildren = {
+  MeetingsIdRoute: MeetingsIdRoute,
+  MeetingsIndexRoute: MeetingsIndexRoute,
+}
+
+const MeetingsRouteWithChildren = MeetingsRoute._addFileChildren(
+  MeetingsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityRoute: ActivityRoute,
+  AdoptionRoute: AdoptionRoute,
+  AdoptionSummaryRoute: AdoptionSummaryRoute,
+  AgentsRoute: AgentsRoute,
+  ApprovalsRoute: ApprovalsRoute,
+  AuditRoute: AuditRoute,
+  BriefRoute: BriefRoute,
+  CommitmentsRoute: CommitmentsRoute,
+  ConnectorsRoute: ConnectorsRoute,
+  EvalsRoute: EvalsRoute,
+  InboxRoute: InboxRoute,
+  MeetingsRoute: MeetingsRouteWithChildren,
+  MemoryRoute: MemoryRoute,
+  OnboardingRoute: OnboardingRoute,
+  PilotRoute: PilotRoute,
+  PoliciesRoute: PoliciesRoute,
+  ResidencyRoute: ResidencyRoute,
+  RoiRoute: RoiRoute,
+  SecurityRoute: SecurityRoute,
+  SecuritySummaryRoute: SecuritySummaryRoute,
+  SettingsRoute: SettingsRoute,
+  ValueRoute: ValueRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
